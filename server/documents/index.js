@@ -2,7 +2,6 @@ module.exports = ({ name, variant1, variant2, receiptId, gene1, gene2, imageSrc 
     const today = new Date();
     // require('handlebars');
     var slides1 = ["slide 111", "slide 12", "slide 31", "slide 41", "slide 51"]
-
 return `
     <!doctype html>
     <html>

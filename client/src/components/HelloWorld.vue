@@ -136,13 +136,13 @@ svG
 
 
       var state = {
-        name: this.name,
-        receiptId: this.receiptId,
-        variant1: this.variant1,
-        variant2: this.variant2,
-        gene1: this.gene1,
-        gene2: this.gene2,
-        imageSrc: this.imageSrc
+        "name": this.name,
+        "receiptId": this.receiptId,
+        "variant1": this.variant1,
+        "variant2": this.variant2,
+        "gene1": this.gene1,
+        "gene2": this.gene2,
+        "imageSrc": this.imageSrc
       }
       console.log("state: ", state)
 
