@@ -15,8 +15,11 @@
       <input type="text" placeholder="gene2" v-model="gene2" />
     </div>
     <button color="primary" @click="createAndDownloadPDF">Download pdf</button>
+
+    <br><br>
+
+    <button color="primary" @click="createAnalysisPDF">Analysis pdf</button>
     <p>
-      abcd
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
@@ -41,7 +44,7 @@
 import * as d3 from 'd3'
 import axios from 'axios';
 import { saveAs } from 'file-saver';
-
+import Analysis_platinum from '../data/analysis_platinum.json';
 
 export default {
   name: 'HelloWorld',
@@ -56,7 +59,8 @@ export default {
       variant2: 0,
       gene1: "",
       gene2: "",
-      imageSrc: ""
+      imageSrc: "",
+      Analysis_platinum_sample: null,
     }
   },
   methods: {
@@ -146,12 +150,21 @@ svG
       }
       console.log("state: ", state)
 
-      axios.post('http://localhost:5000/create-pdf', state)
-        .then(()=> axios.get('http://localhost:5000/fetch-pdf', { responseType: 'blob' }))
+      axios.post('http://localhost:4046/create-pdf', state)
+        .then(()=> axios.get('http://localhost:4046/fetch-pdf', { responseType: 'blob' }))
         .then((res) => {
           const pdfBlob = new Blob([res.data], { type: 'application/pdf' })
 
           saveAs(pdfBlob, "newPdf.pdf")
+        })
+    },
+    createAnalysisPDF(){
+      axios.post('http://localhost:4046/create-pdf', this.Analysis_platinum_sample)
+        .then(()=> axios.get('http://localhost:4046/fetch-pdf', { responseType: 'blob' }))
+        .then((res) => {
+          const pdfBlob = new Blob([res.data], { type: 'application/pdf' })
+
+          saveAs(pdfBlob, "analysis.pdf")
         })
     },
     saveImg(){
@@ -167,7 +180,8 @@ svG
     }
   },
   mounted(){
-
+    this.Analysis_platinum_sample = Analysis_platinum;
+    console.log("this.Analysis_platinum_sample", this.Analysis_platinum_sample)
   }
 }
 </script>

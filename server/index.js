@@ -7,14 +7,14 @@ const pdfTemplate = require('./documents');
 
 const app = express();
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4046;
 
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+app.use(bodyParser.json({limit: '10mb', extended: true}));
 
 app.post('/create-pdf', (req, res) => {
-    pdf.create(pdfTemplate(req.body), {}).toFile('result.pdf', (err) => {
+    pdf.create(pdfTemplate(req.body), {"orientation": "landscape", "border": {"top":"0.5in", "bottom": "0.5in"}}).toFile('result.pdf', (err) => {
         if(err) {
             res.send(Promise.reject());
         }
