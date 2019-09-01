@@ -1,6 +1,6 @@
 module.exports = ({ title, description, project_id, sample_id, payload}) => {
     const today = new Date();
-    console.log("description", description);
+    //console.log("description", description);
     const variants = payload.variants;
 
     var significantVariants = [];
@@ -9,7 +9,7 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
         significantVariants.push(x);
       }
     })
-    console.log("significantVariants", significantVariants);
+    //console.log("significantVariants", significantVariants);
 
     var unknownSignificantVariants = [];
     variants.map(x=>{
@@ -18,7 +18,6 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
       }
     })
     // require('handlebars');
-    var slides1 = ["slide 111", "slide 12", "slide 31", "slide 41", "slide 51"]
 return `
     <!doctype html>
     <html lang="en">
