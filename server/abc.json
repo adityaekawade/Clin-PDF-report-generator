@@ -1,0 +1,71 @@
+{
+  "title": "clin.iobio analysis",
+  "description": "a description goes here",
+  "project_id": "32",
+  "sample_id": "108",
+  "payload": {
+    "variants": [
+      {
+        "start": 40901402,
+        "end": 40901403,
+        "chrom": "chr19",
+        "ref": "G",
+        "alt": "A",
+        "gene": "PRX",
+        "starred": "",
+        "transcript": "ENST00000324001.7",
+        "isProxy": true,
+        "isUserFlagged": "",
+        "filtersPassed": "recessive",
+        "notes": [
+          {
+            "author": "Tonya Lee Disera",
+            "datetime": "2019-8-26 18:31",
+            "note": "Here is a note created from Tony."
+          },
+          {
+            "author": "Tonya Lee Disera",
+            "datetime": "2019-8-26 18:32",
+            "note": "Here is a second longer note. one of the Vuetify.js Vue CLI packages (based on the official examples) to get your project started in no time. Vuetify.js supports SSR (server-side rendering), SPA (single page application), PWA (progressive web application) and standard HTML pages."
+          }
+        ],
+        "interpretation": "sig",
+        "inheritance": "recessive",
+        "impact": "high",
+        "highestImpact": "",
+        "highestImpactInfo": "",
+        "consequence": "stop gained",
+        "polyphen": "",
+        "type": "snp",
+        "SIFT": "",
+        "regulatory": "",
+        "REVEL": "",
+        "rsId": "rs104894714",
+        "dbSnpUrl": "http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=rs104894714",
+        "clinvarUrl": "http://www.ncbi.nlm.nih.gov/clinvar/variation/4787",
+        "clinvarClinSig": "pathogenic",
+        "clinvarTrait": "Charcot-Marie-Tooth disease, demyelinating, type 4f, Charcot-Marie-Tooth disease, type IV, Autosomal recessive Dejerine-Sottas syndrome, not provided",
+        "HGVSc": "ENST00000324001.7:c.2857C>T",
+        "HGVSp": "ENSP00000326018.6:p.Arg953Ter",
+        "afExAC": "4.1e-05",
+        "af1000G": "0",
+        "afgnomAD": "3.251e-05",
+        "qual": "1933.95",
+        "zygosityProband": "HOM",
+        "altCountProband": "41",
+        "refCountProband": "2",
+        "depthProband": 43,
+        "zygosityMother": "HET",
+        "altCountMother": "27",
+        "refCountMother": "20",
+        "depthMother": 47,
+        "zygosityFather": "HET",
+        "altCountFather": "19",
+        "refCountFather": "16",
+        "depthFather": 35,
+        "candidateGene": true,
+        "index": 0
+      }
+    ]
+  }
+}

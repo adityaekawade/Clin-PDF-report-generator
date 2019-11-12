@@ -159,6 +159,8 @@ svG
         })
     },
     createAnalysisPDF(){
+      // http://nv-dev-new.iobio.io/analysistoreport/create-pdf
+      // http://nv-dev-new.iobio.io/analysistoreport/fetch-pdf
       axios.post('http://localhost:4046/create-pdf', this.Analysis_platinum_sample)
         .then(()=> axios.get('http://localhost:4046/fetch-pdf', { responseType: 'blob' }))
         .then((res) => {
