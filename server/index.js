@@ -9,7 +9,7 @@ const pdfTemplate = require('./documents');
 
 const app = express();
 
-const port = process.env.PORT || 4046;
+const port = 4046;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));

@@ -9,8 +9,7 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
       if(x.interpretation==="sig"){
         significantVariants.push(x);
       }
-    })
-
+    }
     significantVariants[0].svg = drawChart(significantVariants[0]);
     // console.log("significantVariants[0].svg", significantVariants[0].svg)
     // console.log("significantVariants", significantVariants);
@@ -24,7 +23,6 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
       }
     })
     // require('handlebars');
-    var slides1 = ["slide 111", "slide 12", "slide 31", "slide 41", "slide 51"]
 return `
     <!doctype html>
     <html lang="en">
