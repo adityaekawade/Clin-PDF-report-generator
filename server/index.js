@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 
-app.post('/create-pdf', (req, res) => {
+app.post('/analysistoreport/create-pdf', (req, res) => {
     pdf.create(pdfTemplate(req.body), {"orientation": "landscape", "border": {"top":"0.5in", "bottom": "0.5in"}}).toFile('result.pdf', (err) => {
         if(err) {
             res.send(Promise.reject());
@@ -25,7 +25,7 @@ app.post('/create-pdf', (req, res) => {
     });
 });
 
-app.get('/fetch-pdf', (req, res) => {
+app.get('/analysistoreport/fetch-pdf', (req, res) => {
     res.sendFile(`${__dirname}/result.pdf`)
 })
 
