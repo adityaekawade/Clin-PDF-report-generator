@@ -266,11 +266,13 @@ return `
           </div>
           <!-- end References/Methodology -->
 
-          ${testVar}
+          <!-- Start variant summaries -->
+          <div class="alert alert-success" role="alert">
+            <h2 style="font-size: 17px">Variant summaries</h2>
+          </div>
+          ${significantVariants[0].gene} : ${significantVariants[0].ref}  > ${significantVariants[0].alt} ${significantVariants[0].type}
+          <br>
 
-
-          <svg width="60%" height="60%" viewBox="0 0 136 80" preserveAspectRatio="none"><defs><linearGradient id="area-chart-gradient" x1="0" x2="0" y1="0" y2="1"><stop class="area-chart-gradient-top" offset="60%"></stop><stop class="area-chart-gradient-bottom" offset="100%"></stop></linearGradient></defs><g class="group" transform="translate(4,30)"><g class="regions"></g><g class="y axis"><g class="tick" transform="translate(0,50)" style="opacity: 1;"><line x2="6" y2="0"></line><text dy=".32em" x="9" y="0" style="text-anchor: start;"></text></g><g class="tick" transform="translate(0,25)" style="opacity: 1;"><line x2="6" y2="0"></line><text dy=".32em" x="9" y="0" style="text-anchor: start;">39x</text></g><g class="tick" transform="translate(0,0)" style="opacity: 1;"><line x2="6" y2="0"></line><text dy=".32em" x="9" y="0" style="text-anchor: start;">78x</text></g><path class="domain" d="M6,0H0V50H6"></path></g><path id="line-chart-path" class="line" d="M5.723076923076923,30.76923076923077L24.164102564102564,28.846153846153843L42.6051282051282,33.97435897435898L61.04615384615385,36.53846153846154L79.48717948717949,40.38461538461539L97.92820512820512,28.846153846153843L116.36923076923077,30.76923076923077"></path><path id="area-chart-path" d="M5.723076923076923,30.76923076923077L24.164102564102564,28.846153846153843L42.6051282051282,33.97435897435898L61.04615384615385,36.53846153846154L79.48717948717949,40.38461538461539L97.92820512820512,28.846153846153843L116.36923076923077,30.76923076923077L116.36923076923077,50L97.92820512820512,50L79.48717948717949,50L61.04615384615385,50L42.6051282051282,50L24.164102564102564,50L5.723076923076923,50Z" style="fill: lightgray"></path></g><circle class="circle" r="3" style="opacity: 0;"></circle><rect class="coverage-bar" width="5" style="opacity: 1;" x="83" y="70" height="10"></rect><rect class="alt-bar" width="5" style="opacity: 1;" x="83" y="76" height="4"></rect><text class="circle-label" x="74.921875" y="30" style="opacity: 1;">20x</text></svg>
-          <div style="height: 14px; background-color: #3586c0 !important; width: ${altCountProband}%"></div>
           ${significantVariants[0].svg}
 
 
