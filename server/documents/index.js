@@ -12,8 +12,7 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
     })
 
     significantVariants[0].svg = drawChart(significantVariants[0]);
-    // console.log("significantVariants[0].svg", significantVariants[0].svg)
-    // console.log("significantVariants", significantVariants);
+
     var depthProband = 28;
     var altCountProband = Math.round((11/28) * 100);
     console.log("altCountProband", altCountProband)
@@ -23,6 +22,20 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
         unknownSignificantVariants.push(x);
       }
     })
+
+    var gtrConditions = payload.phenotypes[0];
+    var phenolyzerPhenotypes = payload.phenotypes[1];
+
+    var gtrFullList = [];
+    payload.gtrFullList.map(gene => {
+      gtrFullList.push(gene.name);
+    })
+
+    var phenolyzerFullList = [];
+    payload.phenolyzerFullList.map(gene => {
+      phenolyzerFullList.push(gene.name);
+    })
+    console.log("phenolyzerFullList", phenolyzerFullList)
     // require('handlebars');
     var slides1 = ["slide 111", "slide 12", "slide 31", "slide 41", "slide 51"]
 return `
@@ -117,7 +130,7 @@ return `
       </head>
       <body>
         <div class="container" style="width:80%">
-          <div class="row mt-5 mb-4">
+          <div class="row mt-1 mb-1">
             <div class="col-xs-3">
             </div>
             <div class="col-xs-3">
@@ -261,7 +274,7 @@ return `
           <div class="alert alert-primary" role="alert">
             <strong class="alertText">References/Methodology</strong>
           </div>
-          <div class="mb-5">
+          <div class="mb-5" style="width:80%">
             DNA sequencing was performed in accordance with established Utah Genome Project (UGP) methodologies including sample preparation, sequencing and data analysis.
           </div>
           <!-- end References/Methodology -->
@@ -274,6 +287,48 @@ return `
           <br>
 
           ${significantVariants[0].svg}
+          <!-- end variant summaries -->
+
+          <!-- start Gene list -->
+          <div class="alert alert-warning mt-5" role="alert">
+            <strong class="alertText">Genes</strong>
+          </div>
+          <div class="mb-5" style="width:80%">
+          <h4> GTR </h4>
+            <table class="table table-bordered" style="width=80%">
+              <thead>
+                <tr>
+                  <th scope="col">Conditions</th>
+                  <th scope="col">Genes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope='row'>${gtrConditions}</th>
+                  <td scope='row' style="max-width:200px; word-wrap:break-word;">${gtrFullList}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4> Phenolyzer </h4>
+              <table class="table table-bordered" style="width=80%">
+                <thead>
+                  <tr>
+                    <th scope="col">Phentypes</th>
+                    <th scope="col">Genes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope='row'>${phenolyzerPhenotypes}</th>
+                    <td scope='row' style="max-width:200px; word-wrap:break-word;">${phenolyzerFullList}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+          <div class="mb-5">
+          </div>
+          <!-- end Gene list -->
 
 
         </div>
