@@ -11,10 +11,7 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
       }
     })
 
-    significantVariants.map(x=> {
-      x.svg = drawChart(x)
-    })
-    // significantVariants[0].svg = drawChart(significantVariants[0]);
+    significantVariants[0].svg = drawChart(significantVariants[0]);
 
     var depthProband = 28;
     var altCountProband = Math.round((11/28) * 100);
@@ -24,11 +21,6 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
       if(x.interpretation==="unknown-sig"){
         unknownSignificantVariants.push(x);
       }
-    })
-    console.log("unknownSignificantVariants", unknownSignificantVariants)
-
-    unknownSignificantVariants.map(x=> {
-      x.svg = drawChart(x)
     })
 
     var gtrConditions = payload.phenotypes[0];
@@ -43,7 +35,7 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
     payload.phenolyzerFullList.map(gene => {
       phenolyzerFullList.push(gene.name);
     })
-    // console.log("phenolyzerFullList", phenolyzerFullList)
+    console.log("phenolyzerFullList", phenolyzerFullList)
     // require('handlebars');
     var slides1 = ["slide 111", "slide 12", "slide 31", "slide 41", "slide 51"]
 return `
@@ -161,73 +153,35 @@ return `
               <br><strong>16012132564</strong>
             </div>
             <div class="column5">
+              Diagnosis:
+              <br><strong>Undiagnosed</strong>
             </div>
             <div class="column5">
+              Date:
+              <br><strong>November 10, 2016</strong>
             </div>
           </div>
           <!-- End header  -->
 
 
 
-          <!-- New Signigicant variants table -->
-            <div class="alert alert-primary" role="alert"  style="width:58%">
+          <!-- New table -->
+            <div class="alert alert-primary" role="alert">
               <strong class="alertText">Signigicant variants </strong>
             </div>
-            <div class="mb-5" style="width:58%">
+            <div class="alert alert-light" role="alert">
+              Gene: PRX
+            </div>
+            <div class="mb-5" style="width:80%">
               ${significantVariants.map(function(item){
-                return  "<div class='alert alert-light' role='alert'><h5>Gene: "+ item.gene +
-                        "</h5></div><strong> Variant information: </strong> <br><br><table class='table table-bordered table-sm'><tbody><tr><th scope='row'> Location </th><td>" + item.chrom +
-                        "</td></tr><tr><th scope='row'> Disease mode of inheritance </th><td>" + item.inheritance +
-                        "</td></tr><tr><th scope='row'> Reference allele </th><td>" + item.ref +
-                        "</td></tr><tr><th scope='row'> Alternate allele </th><td>" + item.alt +
-                        "</td></tr><tr><th scope='row'> CSN </th><td>" + item.transcript +
-                        "</td></tr><tr><th scope='row'> Consequence </th><td>" + item.consequence +
-                        "</td></tr><tr><th scope='row'> dbSNP ID </th><td>" + item.rsId +
-                        "</td></tr><tr><th scope='row'> Type </th><td>" + item.type +
-                        "</td></tr><tr><th scope='row'> REVEL </th><td>" + item.REVEL +
-                        "</td></tr><tr><th scope='row'> HGVSc </th><td>" + item.HGVSc +
-                        "</td></tr><tr><th scope='row'> HGVSp </th><td>" + item.HGVSp +
-                        "</td></tr><tr><th scope='row'> Gnomad allele frequency </th><td>" + item.afgnomAD +
-                        "</td></tr><tr><th scope='row'> ExAC allele frequency </th><td>" + item.afExAC +
-                        "</td></tr><tr><th scope='row'> Impact </th><td>" + item.impact +
-                        "</td></tr></tbody></table><br> <strong> Notes: </strong>" + item.notes.map(x => {
-                          return "<div class='card'> <div class='card-body'> <div><p class='mb-0'>" + x.note + "</p><footer class='blockquote-footer'><i><small>" + x.author + "</small></i></footer></div></div></div>"
-                        }) + "<br> <strong> Variant Summaries: </strong> <br><br>" + item.svg + "<br>"
+                return  "<table class='table table-bordered'><tbody><tr><th scope='row'> Gene </th><td>" + item.gene +
+                        "</td></tr><tr><th scope='row'> Location </th><td>" + item.chrom +
+                        "</td></tr></tbody></table>"
               }).join("")}
             </div>
 
 
-          <!-- end of new Signigicant variants table -->
-
-
-
-          <!-- New unknown Signigicant variants table -->
-            <div class="alert alert-primary" role="alert"  style="width:58%">
-              <strong class="alertText">Unknow significance variants </strong>
-            </div>
-            <div class="mb-5" style="width:58%">
-              ${unknownSignificantVariants.map(function(item){
-                return  "<div class='alert alert-light' role='alert'><h5>Gene: "+ item.gene +
-                        "</h5></div><strong> Variant information: </strong> <br><br><table class='table table-bordered table-sm'><tbody><tr><th scope='row'> Location </th><td>" + item.chrom +
-                        "</td></tr><tr><th scope='row'> Disease mode of inheritance </th><td>" + item.inheritance +
-                        "</td></tr><tr><th scope='row'> Reference allele </th><td>" + item.ref +
-                        "</td></tr><tr><th scope='row'> Alternate allele </th><td>" + item.alt +
-                        "</td></tr><tr><th scope='row'> CSN </th><td>" + item.transcript +
-                        "</td></tr><tr><th scope='row'> Consequence </th><td>" + item.consequence +
-                        "</td></tr><tr><th scope='row'> dbSNP ID </th><td>" + item.rsId +
-                        "</td></tr><tr><th scope='row'> Type </th><td>" + item.type +
-                        "</td></tr><tr><th scope='row'> REVEL </th><td>" + item.REVEL +
-                        "</td></tr><tr><th scope='row'> HGVSc </th><td>" + item.HGVSc +
-                        "</td></tr><tr><th scope='row'> HGVSp </th><td>" + item.HGVSp +
-                        "</td></tr><tr><th scope='row'> Gnomad allele frequency </th><td>" + item.afgnomAD +
-                        "</td></tr><tr><th scope='row'> ExAC allele frequency </th><td>" + item.afExAC +
-                        "</td></tr><tr><th scope='row'> Impact </th><td>" + item.impact +
-                        "</td></tr></tbody></table><br> <strong> Notes: </strong><br> <strong> Variant Summaries: </strong> <br><br>" + item.svg + "<br>"
-              }).join("")}
-            </div>
-
-
-          <!-- end of new unknown variants table -->
+          <!-- end of new table -->
 
 
           <!-- Start unknown significance  -->

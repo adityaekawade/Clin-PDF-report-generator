@@ -34,6 +34,8 @@ return `
         <style>
           body{
             font-size:12px;
+            position: relative;
+            display: block;
           }
           .alertText {
             font-size: 15px;
