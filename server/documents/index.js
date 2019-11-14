@@ -363,8 +363,9 @@ function drawChart(variant){
   var altCountProband = (Number(variant.altCountProband)/variant.depthProband) * 100 ;
   var altCountMother = (Number(variant.altCountMother)/variant.depthMother) * 100 ;
   var altCountFather = (Number(variant.altCountFather)/variant.depthFather) * 100 ;
+  console.log("altCountProband", altCountProband)
   return `
-
+          ${altCountProband}
           <svg height="25px">
           <svg x="10" id="spellcheck-24px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18">
             <path id="Path_1" data-name="Path 1" d="M0,0H18V18H0Z" fill="none"/>
@@ -392,7 +393,7 @@ function drawChart(variant){
           </svg>
 
           <svg height="25px">
-            <text x="41" y="12" style="font-size:12px">Mother </text>
+            <text x="41" y="12" style="font-size:12px">Father </text>
             <text x="101" y="12">${variant.zygosityFather} </text>
             <rect class="grayRect"
                 x="141" y="1" width="100" height="12"/>
