@@ -25,7 +25,6 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
         unknownSignificantVariants.push(x);
       }
     })
-    console.log("unknownSignificantVariants", unknownSignificantVariants)
 
     unknownSignificantVariants.map(x=> {
       x.svg = drawChart(x)
@@ -190,9 +189,9 @@ return `
                         "</td></tr><tr><th scope='row'> Gnomad allele frequency </th><td>" + item.afgnomAD +
                         "</td></tr><tr><th scope='row'> ExAC allele frequency </th><td>" + item.afExAC +
                         "</td></tr><tr><th scope='row'> Impact </th><td>" + item.impact +
-                        "</td></tr></tbody></table><br> <strong> Notes: </strong>" + item.notes.map(x => {
+                        "</td></tr></tbody></table><br> <strong> Notes: </strong>" + (Array.isArray(item.notes) ? " " + item.notes.map(x => {
                           return "<div class='card'> <div class='card-body'> <div><p class='mb-0'>" + x.note + "</p><footer class='blockquote-footer'><i><small>" + x.author + "</small></i></footer></div></div></div>"
-                        }) + "<br> <strong> Variant Summaries: </strong> <br><br>" + item.svg + "<br>"
+                        }) + " " : " no note is added" ) + "<br> <strong> Variant Summaries: </strong> <br><br>" + item.svg + "<br>"
               }).join("")}
             </div>
 
@@ -222,7 +221,10 @@ return `
                         "</td></tr><tr><th scope='row'> Gnomad allele frequency </th><td>" + item.afgnomAD +
                         "</td></tr><tr><th scope='row'> ExAC allele frequency </th><td>" + item.afExAC +
                         "</td></tr><tr><th scope='row'> Impact </th><td>" + item.impact +
-                        "</td></tr></tbody></table><br> <strong> Notes: </strong><br> <strong> Variant Summaries: </strong> <br><br>" + item.svg + "<br>"
+                        "</td></tr><tr><th scope='row'> Impact </th><td>" + (item.impact ===  'low' ? " " +  item.impact + " " :  "") +
+                        "</td></tr></tbody></table><br> <strong> Notes: </strong>" + (Array.isArray(item.notes) ? " " + item.notes.map(x => {
+                          return "<div class='card'> <div class='card-body'> <div><p class='mb-0'>" + x.note + "</p><footer class='blockquote-footer'><i><small>" + x.author + "</small></i></footer></div></div></div>"
+                        }) + " " : " no note is added" ) + "<br> <strong> Variant Summaries: </strong> <br><br>" + item.svg + "<br>"
               }).join("")}
             </div>
 
