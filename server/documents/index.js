@@ -4,28 +4,31 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
     console.log("description", description);
     const variants = payload.variants;
 
+    var variantGenes = [];
+    variants.map(x=>{
+      variantGenes.push(x.gene);
+    })
+
     var significantVariants = [];
     variants.map(x=>{
       if(x.interpretation==="sig"){
         significantVariants.push(x);
       }
     })
-
     significantVariants.map(x=> {
       x.svg = drawChart(x)
     })
-    // significantVariants[0].svg = drawChart(significantVariants[0]);
 
     var depthProband = 28;
     var altCountProband = Math.round((11/28) * 100);
-    console.log("altCountProband", altCountProband)
+
+
     var unknownSignificantVariants = [];
     variants.map(x=>{
       if(x.interpretation==="unknown-sig"){
         unknownSignificantVariants.push(x);
       }
     })
-
     unknownSignificantVariants.map(x=> {
       x.svg = drawChart(x)
     })
@@ -42,7 +45,13 @@ module.exports = ({ title, description, project_id, sample_id, payload}) => {
     payload.phenolyzerFullList.map(gene => {
       phenolyzerFullList.push(gene.name);
     })
-    // console.log("phenolyzerFullList", phenolyzerFullList)
+
+    var genesReport = [];
+    payload.genesReport.map(gene => {
+      genesReport.push(gene.name)
+    })
+    genesReport = genesReport.slice(0,100)
+
     // require('handlebars');
     var slides1 = ["slide 111", "slide 12", "slide 31", "slide 41", "slide 51"]
 return `
@@ -198,7 +207,7 @@ return `
 
           <!-- end of new Signigicant variants table -->
 
-
+          <hr><br>
 
           <!-- New unknown Signigicant variants table -->
             <div class="alert alert-primary" role="alert"  style="width:58%">
@@ -224,146 +233,80 @@ return `
                         "</td></tr><tr><th scope='row'> Impact </th><td>" + (item.impact ===  'low' ? " " +  item.impact + " " :  "") +
                         "</td></tr></tbody></table><br> <strong> Notes: </strong>" + (Array.isArray(item.notes) ? " " + item.notes.map(x => {
                           return "<div class='card'> <div class='card-body'> <div><p class='mb-0'>" + x.note + "</p><footer class='blockquote-footer'><i><small>" + x.author + "</small></i></footer></div></div></div>"
-                        }) + " " : " no note is added" ) + "<br> <strong> Variant Summaries: </strong> <br><br>" + item.svg + "<br>"
+                        }) + " " : " no note is added <br>" ) + "<br> <strong> Variant Summaries: </strong> <br><br>" + item.svg + "<br>"
               }).join("")}
             </div>
 
 
           <!-- end of new unknown variants table -->
 
-
-          <!-- Start unknown significance  -->
-          <div class="alert alert-primary" role="alert">
-            <strong class="alertText">Pathogenic variants </strong>
-          </div>
-          <div class="mb-5" style="width:80%">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Gene</th>
-                  <th scope="col">Location</th>
-                  <th scope="col">CSN</th>
-                  <th scope="col">Consequence</th>
-                  <th scope="col">dbSNP ID</th>
-                  <th scope="col">Inheritance</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${significantVariants.map(function(item){
-                  return "<tr><th scope='row'>" + item.gene +
-                  "</th><td>" + item.chrom + "</td><td>" + item.transcript +
-                  "</td><td>" + item.consequence + "</td><td>" + item.rsId +
-                  "</td><td>" + item.inheritance + "</td>  </tr>"
-                }).join("")}
-              </tbody>
-            </table>
-          </div>
-          <!-- End unknown significance -->
-
-          <!-- start VUS interpretation -->
-          <div class="alert alert-primary" role="alert">
-            <strong class="alertText">Variants of unknown significance</strong>
-          </div>
-          <div class="mb-5" style="width:80%">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Gene</th>
-                  <th scope="col">Location</th>
-                  <th scope="col">CSN</th>
-                  <th scope="col">Consequence</th>
-                  <th scope="col">dbSNP ID</th>
-                  <th scope="col">Inheritance</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${unknownSignificantVariants.map(function(item){
-                  return "<tr><th scope='row'>" + item.gene + "</th><td>" + item.chrom + "</td><td>" + item.transcript + "</td><td>" + item.consequence + "</td><td>" + item.rsId + "</td><td>" + item.inheritance + "</td>  </tr>"
-                }).join("")}
-              </tbody>
-            </table>
-          </div>
-          <div class="mb-5">
-          </div>
-          <!-- end VUS interpretation -->
-
-
+          <hr><br>
 
 
           <!-- start Disclaimers -->
-          <div class="alert alert-primary" role="alert">
+          <div class="alert alert-primary" role="alert" style="width:58%">
             <strong class="alertText">Disclaimers</strong>
           </div>
-          <div class="mb-5" style="width:80%">
+          <div class="mb-5" style="width:58%">
             Genetic testing information has caveats and should not be considered a definitive diagnosis.
           </div>
           <!-- end Disclaimers -->
 
           <!-- start References/Methodology -->
-          <div class="alert alert-primary" role="alert">
+          <div class="alert alert-primary" role="alert" style="width:58%">
             <strong class="alertText">References/Methodology</strong>
           </div>
-          <div class="mb-5" style="width:80%">
+          <div class="mb-5" style="width:58%">
             DNA sequencing was performed in accordance with established Utah Genome Project (UGP) methodologies including sample preparation, sequencing and data analysis.
           </div>
           <!-- end References/Methodology -->
 
-          <!-- Start variant summaries -->
-          <div class="alert alert-success" role="alert">
-            <h2 style="font-size: 17px">Variant summaries</h2>
-          </div>
-          ${significantVariants[0].gene} : ${significantVariants[0].ref}  > ${significantVariants[0].alt} ${significantVariants[0].type}
-          <br>
-
-          ${significantVariants[0].svg}
-          <!-- end variant summaries -->
-
           <!-- start Gene list -->
-          <div class="alert alert-warning mt-5" role="alert">
+          <div class="alert alert-warning mt-5" role="alert" style="width:58%">
             <strong class="alertText">Genes</strong>
           </div>
-          <div class="mb-5" style="width:80%">
-          <h4> GTR </h4>
+          <div class="mb-5" style="width:58%">
             <table class="table table-bordered" style="width=80%">
               <thead>
                 <tr>
-                  <th scope="col">Conditions</th>
-                  <th scope="col">Genes</th>
+                  <th scope="col">Phenotypes searched</th>
+                  <th scope="col">Genes (${genesReport.length})</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope='row'>${gtrConditions}</th>
-                  <td scope='row' style="max-width:200px; word-wrap:break-word;">${gtrFullList}</td>
+                  <th scope='row'>
+                    <strong> GTR: </strong> <br>
+                    ${gtrConditions}
+                    <hr>
+                    <strong> Phenolyzer: </strong> <br>
+                    ${phenolyzerPhenotypes}
+                  </th>
+                  <td scope='row' style="max-width:200px; word-wrap:break-word;">
+                    ${genesReport.map(gene=>{
+                      if(variantGenes.includes(gene)){
+                        return "<span style='color:red'> " + gene +  " </span>"
+                      }
+                      else {
+                        return "<span style='color:black'> " + gene +  " </span>"
+                      }
+                    })}
+                  </td>
                 </tr>
               </tbody>
             </table>
-
-            <h4> Phenolyzer </h4>
-              <table class="table table-bordered" style="width=80%">
-                <thead>
-                  <tr>
-                    <th scope="col">Phentypes</th>
-                    <th scope="col">Genes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope='row'>${phenolyzerPhenotypes}</th>
-                    <td scope='row' style="max-width:200px; word-wrap:break-word;">${phenolyzerFullList}</td>
-                  </tr>
-                </tbody>
-              </table>
           </div>
+
+
           <div class="mb-5">
           </div>
           <!-- end Gene list -->
 
           <!-- Start summary -->
-          <div class="alert alert-primary" role="alert">
+          <div class="alert alert-primary" role="alert" style="width:58%">
             <h2 style="font-size: 17px">Summary</h2>
           </div>
-          <div class="row mb-5" style="width:90%; font-size: 12px">
+          <div class="row mb-5" style="width:58%; font-size: 12px">
             <div class="column" >
               Date of Birth: <strong>04/15/1950</strong>
               <br>
@@ -394,10 +337,10 @@ return `
           <!-- End Summary -->
 
           <!-- Start clinical description -->
-          <div class="alert alert-primary" role="alert">
+          <div class="alert alert-primary" role="alert" style="width:58%">
             <div class="alertText">Clinical Description</div>
           </div>
-          <div class="mb-5" style="width:80%; text-align: justify;">
+          <div class="mb-5" style="width:58%; text-align: justify;">
             According to information provided to ARUP, the patient is a one year old male. He was delivered by cesarean section at 39 weeks and 5 days. At birth he weighed 6 pounds and 1 ounce, and was 17.5 inches long.  He has multiple congenital anomalies including a large occipital encephalocele, tecto-cerebellar dysraphism, posterior plagiocephaly, relative macrocephaly, left-sided facial weakness, unilateral lack of eye closure, optic nerve hypoplasia, prominent nasal bridge and columella, bilateral low-set microtia with ear tags, bilateral mixed hearing loss, Mobitz type II atrioventricular block s/p epicardial pacemaker,  right torticollis, vertebral segmentation defects (C2-3 fusion, abnormal T2-3 and T12), fused right first and second rib and rudimentary left rib, mild scoliosis, long and narrow left thumb, polysplenia, transverse liver and horseshoe kidney.. His weight and height are less than 1st percentile but show normal growth velocity. He was socially smiling at 8 weeks, rolling from front to back at 5 months and babbling since 6 months. He did not fully support his head at nine months. Previous normal diagnostic test results included creatinine, blood urea nitrogen, cytomegalovirus and cytogenomic SNP microarray.  He has one healthy older sister with heterochromia. His father has 2-3 syndactyly and history of porencephalic cyst. His family history also includes a maternal grandfather with unilateral hearing loss at birth, a maternal uncle with macrocephaly, a maternal uncle who died with congenital anomalies and abnormal ears, a maternal great uncle with an unilateral ear anomaly and bilateral hearing loss, a maternal second cousin with an unilateral ear anomaly and hearing loss, a paternal first cousin with congenital heart valve defect requiring surgery, a paternal uncle with sarcoid disease who is 80 percent blind in one eye, another paternal uncle with sarcoidosis and a paternal uncle with cleft palate. His paternal grandmother died with lupus and Crohn’s disease and a paternal great uncle has intellectual disabilities and has been in assisted living since early adulthood.
           </div>
           <!-- End clinical description -->
@@ -423,7 +366,10 @@ function drawChart(variant){
   return `
 
           <svg height="25px">
-          <path height="15px" d="M12.45 16h2.09L9.43 3H7.57L2.46 16h2.09l1.12-3h5.64l1.14 3zm-6.02-5L8.5 5.48 10.57 11H6.43zm15.16.59l-8.09 8.09L9.83 16l-1.41 1.41 5.09 5.09L23 13l-1.41-1.41z"/>
+          <svg x="10" id="spellcheck-24px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18">
+            <path id="Path_1" data-name="Path 1" d="M0,0H18V18H0Z" fill="none"/>
+            <path id="Path_2" data-name="Path 2" d="M9.532,12h1.479L7.394,3H6.077L2.46,12H3.939l.793-2.077H8.725ZM5.27,8.538,6.736,4.717,8.2,8.538ZM16,8.947l-5.727,5.6L7.677,12l-1,.976,3.6,3.524L17,9.923Z" fill="#9a3535"/>
+          </svg>
             <text x="41" y="12" style="font-size:12px">Proband </text>
             <text x="101" y="12">${variant.zygosityProband} </text>
             <rect class="grayRect"
