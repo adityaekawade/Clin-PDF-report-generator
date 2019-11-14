@@ -365,7 +365,6 @@ function drawChart(variant){
   var altCountFather = (Number(variant.altCountFather)/variant.depthFather) * 100 ;
   console.log("altCountProband", altCountProband)
   return `
-          ${altCountProband}
           <svg height="25px">
           <svg x="10" id="spellcheck-24px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18">
             <path id="Path_1" data-name="Path 1" d="M0,0H18V18H0Z" fill="none"/>
