@@ -364,44 +364,53 @@ function drawChart(variant){
   var altCountMother = (Number(variant.altCountMother)/variant.depthMother) * 100 ;
   var altCountFather = (Number(variant.altCountFather)/variant.depthFather) * 100 ;
   console.log("altCountProband", altCountProband)
-  return `
-          <svg height="25px">
-          <svg x="10" id="spellcheck-24px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18">
-            <path id="Path_1" data-name="Path 1" d="M0,0H18V18H0Z" fill="none"/>
-            <path id="Path_2" data-name="Path 2" d="M9.532,12h1.479L7.394,3H6.077L2.46,12H3.939l.793-2.077H8.725ZM5.27,8.538,6.736,4.717,8.2,8.538ZM16,8.947l-5.727,5.6L7.677,12l-1,.976,3.6,3.524L17,9.923Z" fill="#9a3535"/>
-          </svg>
-            <text x="41" y="12" style="font-size:12px">Proband </text>
-            <text x="101" y="12">${variant.zygosityProband} </text>
-            <rect class="grayRect"
-                x="141" y="1" width="100" height="12"/>
-            <rect class="genepanelsRect"
-                 x="141" y="1"  width="${altCountProband}" height="12"/>
-             <text class="tableRectBarText"
-                 x="245" y="12" font-size="11">${variant.altCountProband} of ${variant.depthProband}</text>
-          </svg>
 
-          <svg height="25px">
-            <text x="41" y="12" style="font-size:12px">Mother </text>
-            <text x="101" y="12">${variant.zygosityMother} </text>
-            <rect class="grayRect"
-                x="141" y="1" width="100" height="12"/>
-            <rect class="genepanelsRect"
-                 x="141" y="1"  width="${altCountMother}" height="12"/>
-             <text class="tableRectBarText"
-                 x="245" y="12" font-size="11">${variant.altCountMother} of ${variant.depthMother}</text>
-          </svg>
+  var probandViz = "";
+  if(variant.depthProband!=null){
+    probandViz = `<svg height="25px">
+                    <svg x="10" id="spellcheck-24px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18">
+                      <path id="Path_1" data-name="Path 1" d="M0,0H18V18H0Z" fill="none"/>
+                      <path id="Path_2" data-name="Path 2" d="M9.532,12h1.479L7.394,3H6.077L2.46,12H3.939l.793-2.077H8.725ZM5.27,8.538,6.736,4.717,8.2,8.538ZM16,8.947l-5.727,5.6L7.677,12l-1,.976,3.6,3.524L17,9.923Z" fill="#9a3535"/>
+                    </svg>
+                      <text x="41" y="12" style="font-size:12px">Proband </text>
+                      <text x="101" y="12">${variant.zygosityProband} </text>
+                      <rect class="grayRect"
+                          x="141" y="1" width="100" height="12"/>
+                      <rect class="genepanelsRect"
+                           x="141" y="1"  width="${altCountProband}" height="12"/>
+                       <text class="tableRectBarText"
+                           x="245" y="12" font-size="11">${variant.altCountProband} of ${variant.depthProband}</text>
+                    </svg>
+                `
+  }
 
-          <svg height="25px">
-            <text x="41" y="12" style="font-size:12px">Father </text>
-            <text x="101" y="12">${variant.zygosityFather} </text>
-            <rect class="grayRect"
-                x="141" y="1" width="100" height="12"/>
-            <rect class="genepanelsRect"
-                 x="141" y="1"  width="${altCountFather}" height="12"/>
-             <text class="tableRectBarText"
-                 x="245" y="12" font-size="11">${variant.altCountFather} of ${variant.depthFather}</text>
-          </svg>
+  var depthMotherViz = "";
+  if(variant.depthMother!==null){
+    depthMotherViz = `<svg height="25px">
+                        <text x="41" y="12" style="font-size:12px">Mother </text>
+                        <text x="101" y="12">${variant.zygosityMother} </text>
+                        <rect class="grayRect"
+                            x="141" y="1" width="100" height="12"/>
+                        <rect class="genepanelsRect"
+                             x="141" y="1"  width="${altCountMother}" height="12"/>
+                         <text class="tableRectBarText"
+                             x="245" y="12" font-size="11">${variant.altCountMother} of ${variant.depthMother}</text>
+                      </svg>
+                    `
+  }
 
-
-    `
+  var depthFatherViz = "";
+  if(variant.depthFather!==null){
+    depthFatherViz = `<svg height="25px">
+      <text x="41" y="12" style="font-size:12px">Father </text>
+      <text x="101" y="12">${variant.zygosityFather} </text>
+      <rect class="grayRect"
+          x="141" y="1" width="100" height="12"/>
+      <rect class="genepanelsRect"
+           x="141" y="1"  width="${altCountFather}" height="12"/>
+       <text class="tableRectBarText"
+           x="245" y="12" font-size="11">${variant.altCountFather} of ${variant.depthFather}</text>
+    </svg>`
+  }
+  return ` ${probandViz}${depthMotherViz}${depthFatherViz}   `
 }
