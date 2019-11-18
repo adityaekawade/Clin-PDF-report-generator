@@ -15,10 +15,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 
-var pdfId = Math.random().toString(36).substring(7);
+var pdfId;
 
 app.post('/analysistoreport/create-pdf', (req, res) => {
-    pdf.create(pdfTemplate(req.body), {"orientation": "potrait", "border": {"top":"0.5in", "bottom": "0.5in"}}).toFile(`result_${pdfId}.pdf`, (err) => {
+  pdfId = Math.random().toString(36).substring(7);
+    pdf.create(pdfTemplate(req.body), {"orientation": "potrait", "border": {"top":"0.5in", "bottom": "0.5in"}}).toFile(`results/result_${pdfId}.pdf`, (err) => {
         if(err) {
             res.send(Promise.reject());
         }
@@ -28,7 +29,7 @@ app.post('/analysistoreport/create-pdf', (req, res) => {
 });
 
 app.get('/analysistoreport/fetch-pdf', (req, res) => {
-    res.sendFile(`${__dirname}/result_${pdfId}.pdf`)
+    res.sendFile(`${__dirname}/results/result_${pdfId}.pdf`)
 })
 
 const args = process.argv.slice(2)
