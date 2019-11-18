@@ -209,6 +209,8 @@ return `
                         "</td></tr><tr><th scope='row'> Consequence </th><td>" + item.consequence +
                         "</td></tr><tr><th scope='row'> dbSNP ID </th><td>" + item.rsId +
                         "</td></tr><tr><th scope='row'> Type </th><td>" + item.type +
+                        "</td></tr><tr><th scope='row'> Qual </th><td>" + item.qual +
+                        "</td></tr><tr><th scope='row'> SIFT </th><td>" + item.SIFT +
                         "</td></tr><tr><th scope='row'> REVEL </th><td>" + item.REVEL +
                         "</td></tr><tr><th scope='row'> HGVSc </th><td>" + item.HGVSc +
                         "</td></tr><tr><th scope='row'> HGVSp </th><td>" + item.HGVSp +
@@ -245,13 +247,14 @@ return `
                           "</td></tr><tr><th scope='row'> Consequence </th><td>" + item.consequence +
                           "</td></tr><tr><th scope='row'> dbSNP ID </th><td>" + item.rsId +
                           "</td></tr><tr><th scope='row'> Type </th><td>" + item.type +
+                          "</td></tr><tr><th scope='row'> Qual </th><td>" + item.qual +
+                          "</td></tr><tr><th scope='row'> SIFT </th><td>" + item.SIFT +
                           "</td></tr><tr><th scope='row'> REVEL </th><td>" + item.REVEL +
                           "</td></tr><tr><th scope='row'> HGVSc </th><td>" + item.HGVSc +
                           "</td></tr><tr><th scope='row'> HGVSp </th><td>" + item.HGVSp +
                           "</td></tr><tr><th scope='row'> Gnomad allele frequency </th><td>" + item.afgnomAD +
                           "</td></tr><tr><th scope='row'> ExAC allele frequency </th><td>" + item.afExAC +
                           "</td></tr><tr><th scope='row'> Impact </th><td>" + item.impact +
-                          "</td></tr><tr><th scope='row'> Impact </th><td>" + (item.impact ===  'low' ? " " +  item.impact + " " :  "") +
                           "</td></tr></tbody></table><br> <strong> Notes: </strong>" + (Array.isArray(item.notes) ? " " + item.notes.map(x => {
                             return "<div class='card'> <div class='card-body'> <div><p class='mb-0'>" + x.note + "</p><footer class='blockquote-footer'><i><small>" + x.author + "</small></i></footer></div></div></div>"
                           }) + " " : " no note is added <br>" ) + "<br> <strong> Variant Summaries: </strong> <br><br>" + item.svg + "<br><hr>"
@@ -284,13 +287,14 @@ return `
                           "</td></tr><tr><th scope='row'> Consequence </th><td>" + item.consequence +
                           "</td></tr><tr><th scope='row'> dbSNP ID </th><td>" + item.rsId +
                           "</td></tr><tr><th scope='row'> Type </th><td>" + item.type +
+                          "</td></tr><tr><th scope='row'> Qual </th><td>" + item.qual +
+                          "</td></tr><tr><th scope='row'> SIFT </th><td>" + item.SIFT +
                           "</td></tr><tr><th scope='row'> REVEL </th><td>" + item.REVEL +
                           "</td></tr><tr><th scope='row'> HGVSc </th><td>" + item.HGVSc +
                           "</td></tr><tr><th scope='row'> HGVSp </th><td>" + item.HGVSp +
                           "</td></tr><tr><th scope='row'> Gnomad allele frequency </th><td>" + item.afgnomAD +
                           "</td></tr><tr><th scope='row'> ExAC allele frequency </th><td>" + item.afExAC +
                           "</td></tr><tr><th scope='row'> Impact </th><td>" + item.impact +
-                          "</td></tr><tr><th scope='row'> Impact </th><td>" + (item.impact ===  'low' ? " " +  item.impact + " " :  "") +
                           "</td></tr></tbody></table><br> <strong> Notes: </strong>" + (Array.isArray(item.notes) ? " " + item.notes.map(x => {
                             return "<div class='card'> <div class='card-body'> <div><p class='mb-0'>" + x.note + "</p><footer class='blockquote-footer'><i><small>" + x.author + "</small></i></footer></div></div></div>"
                           }) + " " : " no note is added <br>" ) + "<br><hr>"
@@ -323,6 +327,8 @@ return `
                           "</td></tr><tr><th scope='row'> Consequence </th><td>" + item.consequence +
                           "</td></tr><tr><th scope='row'> dbSNP ID </th><td>" + item.rsId +
                           "</td></tr><tr><th scope='row'> Type </th><td>" + item.type +
+                          "</td></tr><tr><th scope='row'> Qual </th><td>" + item.qual +
+                          "</td></tr><tr><th scope='row'> SIFT </th><td>" + item.SIFT +
                           "</td></tr><tr><th scope='row'> REVEL </th><td>" + item.REVEL +
                           "</td></tr><tr><th scope='row'> HGVSc </th><td>" + item.HGVSc +
                           "</td></tr><tr><th scope='row'> HGVSp </th><td>" + item.HGVSp +
